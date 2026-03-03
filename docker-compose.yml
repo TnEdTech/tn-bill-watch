@@ -6,6 +6,7 @@ services:
     env_file: .env
     volumes:
       - bill-data:/data
+      - ./static:/app/static:ro
     ports:
       - "5000:5000"
     entrypoint: ["python", "web.py"]
