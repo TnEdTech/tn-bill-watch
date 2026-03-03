@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}TN Education Bill Watch{% endblock %}</title>
+  <title>{% block title %}TETA Tennessee Education Bill Watch{% endblock %}</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -11,9 +11,9 @@
       --bg:       #f4f6f9;
       --surface:  #ffffff;
       --border:   #e2e6ea;
-      --nav-bg:   #1b3a2d;
-      --nav-text: #e8f0ec;
-      --accent:   #2d6a4f;
+      --nav-bg:   #1a3d7c;
+      --nav-text: #ffffff;
+      --accent:   #2c5fb5;
       --text:     #1a202c;
       --muted:    #6b7280;
       --radius:   6px;
@@ -24,13 +24,15 @@
     /* Nav */
     nav { background: var(--nav-bg); color: var(--nav-text); padding: .75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
     nav a { color: var(--nav-text); text-decoration: none; font-weight: 600; font-size: 1rem; }
-    nav a:hover { opacity: .8; }
+    nav a:hover { opacity: .8; text-decoration: none; }
+    .nav-brand { display: flex; align-items: center; gap: .65rem; }
+    .nav-brand img { height: 36px; width: auto; display: block; }
     .nav-right { display: flex; align-items: center; gap: 1rem; }
 
     /* Scan button */
     .btn { padding: .4rem .9rem; border-radius: var(--radius); border: none; cursor: pointer; font-size: .85rem; font-weight: 500; }
-    .btn-primary { background: #2d6a4f; color: #fff; }
-    .btn-primary:hover { background: #245a41; }
+    .btn-primary { background: #2c5fb5; color: #fff; }
+    .btn-primary:hover { background: #234e96; }
     .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
 
     /* Banner */
@@ -111,7 +113,10 @@
 <body>
 
 <nav>
-  <a href="/">&#127968; TN Education Bill Watch</a>
+  <a href="https://teta.org" class="nav-brand" target="_blank" rel="noopener">
+    <img src="{{ url_for('static', filename='img/teta-logo.png') }}" alt="TETA logo">
+    <span>TETA Tennessee Education Bill Watch</span>
+  </a>
   <div class="nav-right">
     {% if scan_running is defined and scan_running %}
       <span style="color:#9ae6b4;font-size:.85rem"><span class="spinner"></span> Scanning…</span>
