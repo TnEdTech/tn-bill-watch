@@ -82,6 +82,11 @@ _COMPILED_PATTERNS = [re.compile(p, re.IGNORECASE) for p in _EDUCATION_PATTERNS]
 # ---------------------------------------------------------------------------
 _IGNORE_PREFIXES = (
     "a resolution to honor",
+    "a resolution to commend",
+    "a resolution to congratulate",
+    "a resolution to confirm the appointment of",
+    "a resolution to recognize"
+     
 )
 
 # ---------------------------------------------------------------------------
