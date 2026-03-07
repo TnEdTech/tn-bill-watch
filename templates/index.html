@@ -36,12 +36,27 @@
 
   <!-- Bills panel -->
   <div>
+    <!-- Search bar -->
+    <form method="GET" action="/" class="search-form">
+      <input
+        type="search"
+        name="q"
+        value="{{ query }}"
+        placeholder="Search by bill, title, description, sponsor, or subject…"
+        class="search-input"
+      >
+      <button type="submit" class="btn btn-primary">Search</button>
+      {% if query %}
+        <a href="/{% if status_filter %}?status={{ status_filter }}{% endif %}" class="search-clear">&#10005; Clear</a>
+      {% endif %}
+    </form>
+
     <!-- Filter bar -->
     <div class="filter-bar">
-      <a href="/" class="filter-btn {% if not status_filter %}active{% endif %}">All ({{ total }})</a>
+      <a href="/?{% if query %}q={{ query }}&{% endif %}" class="filter-btn {% if not status_filter %}active{% endif %}">All ({{ total }})</a>
       {% for code, label in STATUS_LABELS.items() %}
         {% if status_counts.get(code, 0) > 0 %}
-          <a href="/?status={{ code }}"
+          <a href="/?{% if query %}q={{ query }}&{% endif %}status={{ code }}"
              class="filter-btn {% if status_filter == code|string %}active{% endif %}">
             {{ label }} ({{ status_counts.get(code, 0) }})
           </a>
@@ -86,6 +101,8 @@
       <div class="empty">
         {% if total == 0 %}
           No bills tracked yet. Run a scan to get started.
+        {% elif query %}
+          No bills match your search for "{{ query }}".
         {% else %}
           No bills match the selected filter.
         {% endif %}
