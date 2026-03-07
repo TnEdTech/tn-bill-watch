@@ -152,6 +152,22 @@ class Database:
         ).fetchall()
         return [dict(r) for r in rows]
 
+    def search_bills(self, query):
+        pattern = f"%{query}%"
+        rows = self.conn.execute(
+            """
+            SELECT * FROM bills
+            WHERE bill_number LIKE ?
+               OR title LIKE ?
+               OR description LIKE ?
+               OR sponsors LIKE ?
+               OR subjects LIKE ?
+            ORDER BY last_updated DESC
+            """,
+            (pattern, pattern, pattern, pattern, pattern),
+        ).fetchall()
+        return [dict(r) for r in rows]
+
     def get_known_bill_ids(self):
         rows = self.conn.execute("SELECT bill_id, change_hash FROM bills").fetchall()
         return {r["bill_id"]: r["change_hash"] for r in rows}

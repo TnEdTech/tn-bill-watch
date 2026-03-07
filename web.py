@@ -49,11 +49,15 @@ def index():
     events = db.get_recent_events(30)
     last_run = db.get_last_run()
 
+    query = request.args.get("q", "").strip()
     status_filter = request.args.get("status", "")
+
+    base_bills = db.search_bills(query) if query else all_bills
+
     bills = (
-        [b for b in all_bills if str(b["status"]) == status_filter]
+        [b for b in base_bills if str(b["status"]) == status_filter]
         if status_filter
-        else all_bills
+        else base_bills
     )
 
     status_counts = {}
@@ -81,6 +85,7 @@ def index():
         n_failed=n_failed,
         scan_running=_scan_running,
         scan_message=_scan_message,
+        query=query,
     )
 
 
