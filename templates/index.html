@@ -83,6 +83,9 @@
             </td>
             <td>
               <a href="/bill/{{ bill.bill_id }}">{{ bill.title }}</a>
+              {% if bill.description %}
+              <div style="font-size:.75rem;color:var(--muted);margin-top:.2rem">{{ bill.description | truncate(140, True, '…') }}</div>
+              {% endif %}
             </td>
             <td>
               {% set color = STATUS_COLORS.get(bill.status, 'neutral') %}
