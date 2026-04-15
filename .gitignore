@@ -2,3 +2,6 @@
 data/*.db
 __pycache__/
 *.pyc
+sessions.md
+wins.md
+futureplans.md

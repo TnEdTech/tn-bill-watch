@@ -8,7 +8,7 @@ services:
       - ./data:/data
       - ./static:/app/static:ro
     ports:
-      - "5000:5000"
+      - "5090:5000"
     entrypoint: ["python", "web.py"]
     restart: unless-stopped
 
